@@ -5,28 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="Untitled-1.png" type="image/png">
     <title>Trillix</title>
 </head>
 <body>
-    <nav class="navbar">
+     <nav class="navbar">
         <img src="bl title.png" id="logo">
-        <ul>
+        <ul class="nav-links">
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Best deals</a></li>
                 <li><a href="#form" id="mybtn">Sign in</a></li> 
         </ul>
         
         <div id="modal">
-            <div class="close">&times;</div>
+            
             <div class="container" id="main">
+                
                 <div class="sign-up">
+                    <div class="close">&times;</div>
                     <form action="#">
                         <h1>Create Account</h1>
-                        <div class="social-container">
-                            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
+                        
                         <p>or use your email for registration</p>
                         <input type="text" name="txt" placeholder="Name" required="">
                         <input type="email" name="email" placeholder="Email" required="">
@@ -35,13 +34,10 @@
                     </form>
                 </div>
                 <div class="sign-in">
+                    <div class="close">&times;</div>
                     <form action="#">
                         <h1>Sign in</h1>
-                        <div class="social-container">
-                            <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                            <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
+                        
                         <p>or use your account</p>
                         <input type="email" name="email" placeholder="Email" required="">
                         <input type="password" name="pswd" placeholder="Password" required="">
@@ -65,7 +61,12 @@
                 </div>
             </div>
         </div>
+        <img src="bar-white2.png" class="menu-btn">
     </nav>
+    <header class="head">
+        <div class="logo"><img src="tile.png" alt=""></div>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore, praesentium! Ipsa vel nobis beatae pariatur enim, corrupti eligendi ea iusto exercitationem.</p>
+    </header>
     <script src="file.js"></script>
 </body>
 </html>

@@ -24,3 +24,9 @@ const signUpButton = document.getElementById('signUp');
 		signInButton.addEventListener('click', () => {
 			main.classList.remove("right-panel-active");
 		});
+/*menu humbureger (jo3et)*/
+const menubtn = document.querySelector('.menu-btn');
+    const navlinks = document.querySelector('.nav-links');
+    menubtn.addEventListener('click',()=>{
+        navlinks.classList.toggle('mobile-menu');
+    });
