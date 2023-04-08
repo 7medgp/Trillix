@@ -1,32 +1,13 @@
-/*modal*/
-var mybtn=document.getElementById("mybtn");
-var modal=document.getElementById("modal");
-var close=document.querySelector(".close");
-mybtn.onclick=function(){
-    modal.style.display="block";
-}
-close.onclick=function(){
-    modal.style.display="none";
-}
-window.onclick=function(event){
-    if(event.target==modal){
-        modal.style.display="none";
+let btn=document.getElementById("btn");
+let btntext=document.getElementById("btntext");
+let btnIcon=document.getElementById("btnIcon");
+btn.onclick=function(){
+    document.body.classList.toggle("dark-theme");
+    if( document.body.classList.contains("dark-theme")){
+        btnIcon.class='bx bxs-sun';
+        btntext.innerHTML="Light";
+    }else{
+        btnIcon.class='bx bxs-moon';
+        btntext.innerHTML="Dark";
     }
 }
-/*zina taa el form*/
-const signUpButton = document.getElementById('signUp');
-		const signInButton = document.getElementById('signIn');
-		const main = document.getElementById('main');
-
-		signUpButton.addEventListener('click', () => {
-			main.classList.add("right-panel-active");
-		});
-		signInButton.addEventListener('click', () => {
-			main.classList.remove("right-panel-active");
-		});
-/*menu humbureger (jo3et)*/
-const menubtn = document.querySelector('.menu-btn');
-    const navlinks = document.querySelector('.nav-links');
-    menubtn.addEventListener('click',()=>{
-        navlinks.classList.toggle('mobile-menu');
-    });

@@ -9,25 +9,44 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Trillix</title>
 </head>
-<body>
+<body class="light">
     <header>
-        <nav class="nav container">
-            <a href="#" class="logo">
-                <img src="img/bl title.png" alt="">
-            </a>
-            <ul class="navbar">
-                <li><a href="#home" class="active">Home</a></li>
-                <li><a href="#featured">Featured</a></li>
-                <li><a href="#shop">Shop</a></li>
-                <li><a href="new">New</a></li>
-            </ul>
-            <div class="nav-icons">
-                <a href="#" class="user"><i class='bx bxs-user'></i></a>
-                <a href="#" class="basket"><i class='bx bxs-basket'></i><span>0</span></a>
-                <i class='bx bx-menu' id="menu-icon"></i>
-            </div>
-        </nav>
+        <div class="background-nav">
+            <nav class="nav container">
+                <a href="#" class="logo">
+                    <img src="img/bl title.png" alt="">
+                </a>
+                <ul class="navbar">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="new">New</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="#" class="user"><i class='bx bxs-user'></i></a>
+                    <a href="#" class="basket"><i class='bx bxs-basket'></i><span>0</span></a>
+                    <i class='bx bx-menu' id="menu-icon"></i>
+                    <div class="toggle-btn" id="btn">
+                        <span id="btntext">Dark</span>
+                        <i class='bx bxs-moon' id="btnIcon"></i>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
     </header>
+    <section class="home" id="home">
+        <div class="home-container container">
+            <div class="home-text">
+                <h1>Ahmed</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
+                <a href="#" class="btn">Buy now</a>
+            </div>
+            <div class="home-img">
+                <img src="img/tile.png" alt="" >
+            </div>
+        </div>
+    </section>
     <script src="file.js"></script>
 </body>
 </html>
