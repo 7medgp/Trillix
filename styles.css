@@ -109,6 +109,7 @@ nav{
 	padding: 4px;
 	color:var(--bg-color);
 }
+/*modal*/
 /* light mode*/
 .toggle-btn{
 	background-color: var(--main-color);
