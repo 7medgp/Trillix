@@ -8,13 +8,13 @@ let logo1=document.getElementById("logo1");
 btn.onclick=function(){
     document.body.classList.toggle("dark-theme");
     if( document.body.classList.contains("dark-theme")){
-        btnIcon.class="bx bxs-sun";
+        btnIcon.src="img/bxs-sun.png";
         btntext.innerHTML="Light";
         tile.src ="img/tile.white.png";
         logo.src ="img/bl title.white.png";
         logo1.src ="img/bl title.white.png";
     }else{
-        btnIcon.class="bx bxs-moon";
+        btnIcon.src="img/bxs-moon (1).png";
         btntext.innerHTML="Dark";
         tile.src ="img/tile.png";
         logo.src ="img/bl title.png";

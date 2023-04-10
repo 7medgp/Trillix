@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylegeneral.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="img/Untitled-1.png" type="image/png">
-
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Trillix</title>
 </head>
 <body class="light">
+    <div class="toggle-btn" id="btn">
+        <span id="btntext">Dark</span>
+        <img src="img/bxs-moon (1).png" id="btnIcon" alt="">
+    </div>
     <header>
         <div class="background-nav">
             <nav class="nav container">
@@ -23,20 +27,20 @@
                     <li><a href="#shop">Shop</a></li>
                     <li><a href="#new">New</a></li>
                 </ul>
+                <div class="search-bar">
+                    <input type="text" placeholder="What are you looking for?">
+                    <a href="#"><i class='bx bx-search'></i></a>
+                </div>
                 <div class="nav-icons">
                     <a href="#" class="user"><i class='bx bxs-user'></i></a>
                     
                     <a href="#" class="basket"><i class='bx bxs-basket'></i><span>0</span></a>
-                    <div class="toggle-btn" id="btn">
-                        <span id="btntext">Dark</span>
-                        <i class='bx bxs-moon' id="btnIcon"></i>
-                    </div>
                     <i class='bx bx-menu' id="menu-icon"></i>
                 </div>
             </nav>
         </div>
-        
     </header>
+    
     <section class="home" id="home">
         <div class="home-container container">
             <div class="home-text">
@@ -138,20 +142,6 @@
             </div>
         </div>
     </section>
-    <section id="about-us">
-        <div class="container">
-          <h2>About Us</h2>
-          <p>We are a team of passionate professionals dedicated to providing the best service and solutions for our clients. Our mission is to deliver high-quality results while maintaining a focus on customer satisfaction and exceeding expectations.</p>
-          <ul>
-            <li><strong>Our Values:</strong></li>
-            <li>Integrity</li>
-            <li>Teamwork</li>
-            <li>Innovation</li>
-            <li>Excellence</li>
-          </ul>
-          <p>Contact us today to learn more about how we can help you achieve your goals.</p>
-        </div>
-      </section>
       <footer class="container">
         <div class="footer-box">
             <a href="#" class="logo">
@@ -169,7 +159,7 @@
             <a href="#home">Home</a>
             <a href="#featured">Featured</a>
             <a href="#shop">Shop</a>
-            <a href="#new">New</a>
+            <a href="aboutus.html">About Us</a>
         </div>
         
       </footer>
