@@ -207,7 +207,7 @@ footer .logo{
 	padding: 25px;
 	text-align: center;
 }
-@media(max-width:1300px){
+@media(max-width:970px){
 	.container{
 		margin-left: 1rem;
 		margin-right: 1rem;

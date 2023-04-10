@@ -1,1 +1,10 @@
+.values{
+    padding: 20px;
+    display: flex ;
+    justify-content: center;
+}
 
+.values ul{
+    display: block;
+    text-align: center;
+}
