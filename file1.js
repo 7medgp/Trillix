@@ -9,13 +9,11 @@ btn.onclick=function(){
     if( document.body.classList.contains("dark-theme")){
         btnIcon.src="img/bxs-sun.png";
         btntext.innerHTML="Light";
-       
         logo.src ="img/bl title.white.png";
         logo1.src ="img/bl title.white.png";
     }else{
         btnIcon.src="img/bxs-moon (1).png";
         btntext.innerHTML="Dark";
-        
         logo.src ="img/bl title.png";
         logo1.src ="img/bl title.png";
     }

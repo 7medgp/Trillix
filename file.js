@@ -21,6 +21,14 @@ btn.onclick=function(){
         logo1.src ="img/bl title.png";
     }
 }
+/*recherche bl enter*/
+let rech=document.getElementById('rech');
+rech.addEventListener("keypress",function(event){
+    if (event.key === "Enter"){
+        event.preventDefault();
+        document.getElementById("bassara").click();
+    }
+});
 /*menu humburger*/
 let menu=document.querySelector('#menu-icon');
 let navbar=document.querySelector('.navbar');
