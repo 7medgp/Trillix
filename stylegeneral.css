@@ -255,9 +255,17 @@ footer .logo{
 	.navbar.active{
 		right: 0;
 	}
+	.search-bar{
+		width: 100px;
+		height: 20px;
+	}
+	.search-bar input{
+		width: 70px;
+	}
     footer{
 		display: grid;
 		justify-content: center;
+		align-items: center;
 		grid-template-columns: repeat(auto-fit,minmax(220px,auto));
 	}
 	.logo img{
@@ -265,5 +273,9 @@ footer .logo{
 	}
 	.nav-icons .bx{
 		font-size: 20px;
+		
+	}
+	.social{
+		padding:  0 30px 0 40px;
 	}
 }
