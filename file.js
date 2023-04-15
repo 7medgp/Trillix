@@ -41,3 +41,22 @@ window.onscroll=()=>{
     menu.classList.remove('bx-x');
     navbar.classList.remove('active');
 }
+/*modal*/
+var mybtn=document.getElementById("mybtn");
+var modal=document.getElementById("modal");
+var close=document.querySelector(".close");
+var send=document.querySelector(".send");
+mybtn.onclick=function(){
+    modal.style.display="block";
+}
+close.onclick=function(){
+    modal.style.display="none";
+}
+send.onclick=function(){
+    modal.style.display="none";
+}
+window.onclick=function(event){
+    if(event.target==modal){
+        modal.style.display="none";
+    }
+}
