@@ -49,7 +49,7 @@
                 <div class="search-bar">
                     <form action="shop.php" method="post">
                         <input type="text" placeholder="What are you looking for?" name="search">
-                        <button type="submit" class="btnsubmit"><i class='bx bx-search'></i></button>
+                        <button type="submit" class="btnsubmit" style="background: var(--main-color);color: #F5F4F4;cursor: pointer;transition: 0.4s;border:0;"><i class='bx bx-search'></i></button>
                     </form>
                 </div>
                 <div class="nav-icons">

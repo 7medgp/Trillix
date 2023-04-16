@@ -46,8 +46,10 @@
                     <li><a href="shop.php">New</a></li>
                 </ul>
                 <div class="search-bar">
-                    <input type="text" placeholder="What are you looking for?">
-                    <a href="shop.php"><i class='bx bx-search'></i></a>
+                    <form action="shop.php" method="post">
+                        <input type="text" placeholder="What are you looking for?" name="search">
+                        <button type="submit" class="btnsubmit" style="background: var(--main-color);color: #F5F4F4;cursor: pointer;transition: 0.4s;border:0;"><i class='bx bx-search'></i></button>
+                    </form>
                 </div>
                 <div class="nav-icons">
                     <a href="#" class="user"><i class='bx bxs-user'></i></a>
