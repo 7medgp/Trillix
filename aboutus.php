@@ -1,5 +1,20 @@
 <?php
   session_start();
+  $themeClass = '';
+    if (!empty($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
+        $themeClass = 'dark-theme';
+        $btnIcon="img/bxs-sun.png";
+        $btntext="Light";
+        $logo ="img/bl title.white.png";
+        $logo1 ="img/bl title.white.png";
+
+    }else{
+        $btnIcon="img/bxs-moon (1).png";
+        $btntext="Dark";
+        $logo ="img/bl title.png";
+        $logo1 ="img/bl title.png";
+
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,16 +28,16 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Trillix</title>
 </head>
-<body class="light">
+<body class="<?php echo $themeClass; ?>">
     <div class="toggle-btn" id="btn">
-        <span id="btntext">Dark</span>
-        <img src="img/bxs-moon (1).png" id="btnIcon" alt="">
+        <span id="btntext"><?php echo $btntext; ?></span>
+        <img src="<?php echo $btnIcon; ?>" id="btnIcon" alt="">
     </div>
     <header>
         <div class="background-nav">
             <nav class="nav container">
                 <a href="index.html" class="logo">
-                    <img src="img/bl title.png" id="logo">
+                    <img src="<?php echo $logo; ?>" id="logo">
                 </a>
                 <ul class="navbar">
                     <li><a href="index.html" class="active">Home</a></li>
@@ -76,7 +91,7 @@
       <footer class="container">
         <div class="footer-box">
             <a href="#" class="logo">
-                <img src="img/bl title.png" id="logo2">
+                <img src="<?php echo $logo1; ?>" id="logo2">
             </a>
             <div class="social">
                 <a href="#"><i class='bx bxl-facebook' ></i></a>
@@ -93,9 +108,9 @@
         </div>
         <div class="footer-box">
             <h3>Pages</h3>
-            <a href="index.html">Home</a>
-            <a href="shop.html">Shop</a>
-            <a href="aboutus.html">About Us</a>
+            <a href="index.php">Home</a>
+            <a href="shop.php">Shop</a>
+            <a href="aboutus.php">About Us</a>
             <a href="contactus.html">Contact Us</a>
             <a href="faq.html">FAQ's</a>
         </div> 

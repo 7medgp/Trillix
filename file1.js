@@ -1,23 +1,28 @@
 let btn=document.getElementById("btn");
 let btntext=document.getElementById("btntext");
 let btnIcon=document.getElementById("btnIcon");
-
 let logo=document.getElementById("logo");
 let logo1=document.getElementById("logo2");
 btn.onclick=function(){
     document.body.classList.toggle("dark-theme");
+    let theme = "light";
     if( document.body.classList.contains("dark-theme")){
         btnIcon.src="img/bxs-sun.png";
         btntext.innerHTML="Light";
         logo.src ="img/bl title.white.png";
         logo1.src ="img/bl title.white.png";
+        theme="dark";
     }else{
         btnIcon.src="img/bxs-moon (1).png";
         btntext.innerHTML="Dark";
         logo.src ="img/bl title.png";
         logo1.src ="img/bl title.png";
+        theme="light";
     }
+    document.cookie = "theme=" + theme;
 }
+tile.src ="img/tile.white.png";
+tile.src ="img/tile.png";
 /*menu humburger*/
 let menu=document.querySelector('#menu-icon');
 let navbar=document.querySelector('.navbar');

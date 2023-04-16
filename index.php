@@ -1,5 +1,20 @@
 <?php
-    session_start();
+  session_start();
+  $themeClass = '';
+    if (!empty($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
+        $themeClass = 'dark-theme';
+        $btnIcon="img/bxs-sun.png";
+        $btntext="Light";
+        $logo ="img/bl title.white.png";
+        $logo1 ="img/bl title.white.png";
+        $tile ="img/tile.white.png";
+    }else{
+        $btnIcon="img/bxs-moon (1).png";
+        $btntext="Dark";
+        $logo ="img/bl title.png";
+        $logo1 ="img/bl title.png";
+        $tile ="img/tile.png";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,26 +29,26 @@
     
     <title>Trillix</title>
 </head>
-<body class="light">
+<body class="<?php echo $themeClass; ?>">
     <div class="toggle-btn" id="btn">
-        <span id="btntext">Dark</span>
-        <img src="img/bxs-moon (1).png" id="btnIcon" alt="">
+        <span id="btntext"><?php echo $btntext; ?></span>
+        <img src="<?php echo $btnIcon; ?>" id="btnIcon" alt="">
     </div>
     <header>
         <div class="background-nav">
             <nav class="nav container">
-                <a href="#" class="logo">
-                    <img src="img/bl title.png" id="logo">
+                <a href="index.html" class="logo">
+                    <img src="<?php echo $logo; ?>" id="logo">
                 </a>
                 <ul class="navbar">
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#featured">Featured</a></li>
-                    <li><a href="#shop">Shop</a></li>
-                    <li><a href="#new">New</a></li>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="shop.html">Featured</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="shop.html">New</a></li>
                 </ul>
                 <div class="search-bar">
-                    <input type="text" placeholder="What are you looking for?" id="rech">
-                    <a href="shop.html"><i class='bx bx-search' id="bassara"></i></a>
+                    <input type="text" placeholder="What are you looking for?">
+                    <a href="shop.html"><i class='bx bx-search'></i></a>
                 </div>
                 <div class="nav-icons">
                     <?php
@@ -51,10 +66,8 @@
                     <a href="#" class="basket"><i class='bx bxs-basket'></i><span>0</span></a>
                     <i class='bx bx-menu' id="menu-icon"></i>
                 </div>
-                
             </nav>
         </div>
-        
     </header>
     
     <section class="home" id="home">
@@ -65,7 +78,7 @@
                 <a href="#" class="btn">Buy now</a>
             </div>
             <div class="home-img">
-                <img src="img/tile.png" id="tile">
+                <img src="<?php echo $tile; ?>" id="tile">
             </div>
         </div>
     </section>
@@ -155,7 +168,7 @@
       <footer class="container">
         <div class="footer-box">
             <a href="#" class="logo">
-                <img src="img/bl title.png" id="logo1">
+                <img src="<?php echo $logo1; ?>" id="logo1">
             </a>
             <div class="social">
                 <a href="#"><i class='bx bxl-facebook' ></i></a>

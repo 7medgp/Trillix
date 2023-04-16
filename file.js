@@ -7,20 +7,26 @@ let logo=document.getElementById("logo");
 let logo1=document.getElementById("logo1");
 btn.onclick=function(){
     document.body.classList.toggle("dark-theme");
+    let theme = '';
     if( document.body.classList.contains("dark-theme")){
         btnIcon.src="img/bxs-sun.png";
         btntext.innerHTML="Light";
         tile.src ="img/tile.white.png";
         logo.src ="img/bl title.white.png";
         logo1.src ="img/bl title.white.png";
+        theme='dark';
     }else{
         btnIcon.src="img/bxs-moon (1).png";
         btntext.innerHTML="Dark";
         tile.src ="img/tile.png";
         logo.src ="img/bl title.png";
         logo1.src ="img/bl title.png";
+        theme='light';
     }
+    document.cookie ='theme='+ theme;
 }
+
+
 /*recherche bl enter*/
 let rech=document.getElementById('rech');
 rech.addEventListener("keypress",function(event){
