@@ -37,18 +37,20 @@
     <header>
         <div class="background-nav">
             <nav class="nav container">
-                <a href="index.html" class="logo">
+                <a href="index.php" class="logo">
                     <img src="<?php echo $logo; ?>" id="logo">
                 </a>
                 <ul class="navbar">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="shop.html">Featured</a></li>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="shop.html">New</a></li>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#new">New</a></li>
                 </ul>
                 <div class="search-bar">
-                    <input type="text" placeholder="What are you looking for?">
-                    <a href="shop.html"><i class='bx bx-search'></i></a>
+                    <form action="shop.php" method="post">
+                        <input type="text" placeholder="What are you looking for?" name="search">
+                        <button type="submit" class="btnsubmit"><i class='bx bx-search'></i></button>
+                    </form>
                 </div>
                 <div class="nav-icons">
                     <?php
@@ -185,9 +187,9 @@
         </div>
         <div class="footer-box">
             <h3>Pages</h3>
-            <a href="index.html">Home</a>
+            <a href="index.php">Home</a>
             <a href="shop.php">Shop</a>
-            <a href="aboutus.html">About Us</a>
+            <a href="aboutus.php">About Us</a>
             <a href="fuck.php">Contact Us</a>
             <a href="faq.html">FAQ's</a>
         </div> 

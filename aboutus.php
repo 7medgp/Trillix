@@ -34,20 +34,20 @@
         <img src="<?php echo $btnIcon; ?>" id="btnIcon" alt="">
     </div>
     <header>
-        <div class="background-nav">
+    <div class="background-nav">
             <nav class="nav container">
-                <a href="index.html" class="logo">
+                <a href="index.php" class="logo">
                     <img src="<?php echo $logo; ?>" id="logo">
                 </a>
                 <ul class="navbar">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="shop.html">Featured</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="shop.html">New</a></li>
+                    <li><a href="index.php" class="active">Home</a></li>
+                    <li><a href="shop.php">Featured</a></li>
+                    <li><a href="shop.php">Shop</a></li>
+                    <li><a href="shop.php">New</a></li>
                 </ul>
                 <div class="search-bar">
                     <input type="text" placeholder="What are you looking for?">
-                    <a href="shop.html"><i class='bx bx-search'></i></a>
+                    <a href="shop.php"><i class='bx bx-search'></i></a>
                 </div>
                 <div class="nav-icons">
                     <a href="#" class="user"><i class='bx bxs-user'></i></a>

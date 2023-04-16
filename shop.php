@@ -36,18 +36,21 @@
     <header>
         <div class="background-nav">
             <nav class="nav container">
-                <a href="index.html" class="logo">
+                <a href="index.php" class="logo">
                     <img src="<?php echo $logo; ?>" id="logo">
                 </a>
                 <ul class="navbar">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="shop.html">Featured</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="shop.html">New</a></li>
+                    <li><a href="index.php" class="active">Home</a></li>
+                    <li><a href="shop.php">Featured</a></li>
+                    <li><a href="shop.php">Shop</a></li>
+                    <li><a href="shop.php">New</a></li>
                 </ul>
                 <div class="search-bar">
-                    <input type="text" placeholder="What are you looking for?">
-                    <a href="shop.html"><i class='bx bx-search'></i></a>
+                    <form action="shop.php" method="post">
+                        <input type="text" placeholder="What are you looking for?" name="search">
+                        <button type="submit"><i class='bx bx-search'></i></button>
+                    </form>
+                    
                 </div>
                 <div class="nav-icons">
                     <a href="#" class="user"><i class='bx bxs-user'></i></a>
@@ -65,14 +68,23 @@
         <div class="shop-container container">
             <?php
                     $conn=mysqli_connect("localhost","root","","trillix");
-                    $req_prod="SELECT label, prix, urltsawer from produits;";
+                    if($_SERVER["REQUEST_METHOD"]=="POST"){
+                    $search=htmlspecialchars($_POST['search']);
+                    
+                    if($search==""){
+                        
+                        $req_prod="SELECT label, prix, urltsawer from produits;";
+                    }else{
+                        $req_prod="SELECT label, prix, urltsawer from produits where label='$search';";
+                    }
+                    
                     if(mysqli_num_rows(mysqli_query($conn,$req_prod))> 0){
                         foreach(mysqli_query($conn,$req_prod) as $row){
                             
                             echo "<div class='box'><img src='".$row["urltsawer"]."' alt=''><h2>".$row["label"]."</h2><span>".$row["prix"]."</span><a href='#'><i class='bx bx-basket'></i></a></div>";
                         };
                     
-                    }
+                    }}else{echo "ta7che";}
                     mysqli_close($conn);
             ?>
     </section>

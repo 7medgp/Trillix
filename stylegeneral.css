@@ -101,11 +101,13 @@ nav{
     outline: none;
 	color: #F5F4F4;
 }
-.search-bar .bx{
+.search-bar form .btnsubmit{
+	background: var(--main-color);
 	color: #F5F4F4;
 	cursor: pointer;
 	transition: 0.4s;
 }
+
 .search-bar .bx:hover{
 	transform: rotate(360deg);
 }
@@ -143,18 +145,6 @@ nav{
 	padding: 4px;
 	color:#F5F4F4;
 }
-/*modal*/
-#modal{
-    position: relative;
-    top:0;
-	right: -100px;
-    height: 100vh;
-    background-color: rgba(0,0,0,.1);
-    display: none;
-	color: var(--text-color);
-	padding: 3rem 0;
-}
-
 /* light mode*/
 .toggle-btn{
 	position: fixed;
