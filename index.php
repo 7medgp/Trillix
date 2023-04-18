@@ -107,7 +107,7 @@
     </section>
     <section class="shop" id="shop">
         <div class="heading">
-            <h2><span>Shop</span> Now</h2>
+            <h2>Best <span>Sellers</span></h2>
         </div>
         <div class="shop-container container">
             <div class="box">

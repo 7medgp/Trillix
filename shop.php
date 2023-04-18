@@ -15,6 +15,7 @@
         $logo1 ="img/bl title.png";
 
     }
+    $_COOKIE['window']=false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,19 +41,29 @@
                     <img src="<?php echo $logo; ?>" id="logo">
                 </a>
                 <ul class="navbar">
-                    <li><a href="index.php" class="active">Home</a></li>
-                    <li><a href="shop.php">Featured</a></li>
-                    <li><a href="shop.php">Shop</a></li>
-                    <li><a href="shop.php">New</a></li>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#new">New</a></li>
                 </ul>
                 <div class="search-bar">
-                    <form action="shop.php" method="post">
+                    <form action="shop1.php" method="post">
                         <input type="text" placeholder="What are you looking for?" name="search">
                         <button type="submit" class="btnsubmit" style="background: var(--main-color);color: #F5F4F4;cursor: pointer;transition: 0.4s;border:0;"><i class='bx bx-search'></i></button>
                     </form>
                 </div>
                 <div class="nav-icons">
-                    <a href="#" class="user"><i class='bx bxs-user'></i></a>
+                    <?php
+                        if(array_key_exists('nom',$_SESSION)){
+                            ?>
+                            <a href="account.php"><i class='bx bxs-user'></i></a>
+                            <?php
+                        }else{
+                            ?>
+                            <a href="login.html"><i class='bx bxs-user'></i></a>
+                            <?php
+                        }
+                    ?>
                     
                     <a href="#" class="basket"><i class='bx bxs-basket'></i><span>0</span></a>
                     <i class='bx bx-menu' id="menu-icon"></i>
@@ -64,27 +75,44 @@
         <div class="heading">
             <h2><span>Shop</span> Now</h2>
         </div>
+        <div class="side-bar" style="width:15%; position:relative; left:20px;">
+            <h3 style="margin-bottom: 10px;">Categories</h3>
+            
+            <form aciton="shop.php" id="check" method="get">
+                <label style="display: block;"><input type="checkbox" name="card" value="card" form="check"  id="cat">Cards</label>
+                <label style="display: block;"><input type="checkbox" name="board" value="board game" form="check"  id="cat">Board Game</label>
+                <label style="display: block;"><input type="checkbox" name="console" value="console" form="check" id="cat">Console</label>
+                
+                <button type="submit" style="border: 0px; width: 60px;border-radius: 20px; background: #E21D12; color: #f4f5f5;">let's see</button>
+            </form>
+        </div>
         <div class="shop-container container">
             <?php
-                    $conn=mysqli_connect("localhost","root","","trillix");
-                    if($_SERVER["REQUEST_METHOD"]=="POST"){
-                    $search=htmlspecialchars($_POST['search']);
-                    
-                    if($search==""){
-                        
-                        $req_prod="SELECT label, prix, urltsawer from produits;";
-                    }else{
-                        $req_prod="SELECT label, prix, urltsawer from produits where label='$search';";
+                $conn=mysqli_connect("localhost","root","","trillix");
+                if(($_SERVER['HTTP_REFERER']=="http://127.0.0.1/projetfed/index.php")||($_SERVER['HTTP_REFERER']=="http://127.0.0.1/projetfed/aboutus.php")||($_SERVER['HTTP_REFERER']=="http://127.0.0.1/projetfed/shop1.php")||(($_SERVER['HTTP_REFERER']=="http://127.0.0.1/projetfed/shop.php")&&(extract($_GET)===0))){
+                    $req_prod="SELECT label, prix, urltsawer from produits;";
+                    if(mysqli_num_rows(mysqli_query($conn,$req_prod))> 0){
+                        foreach(mysqli_query($conn,$req_prod) as $row){
+                            echo "<div class='box'><img src='".$row["urltsawer"]."' alt=''><h2>".$row["label"]."</h2><span>".$row["prix"]."</span><a href='#'><i class='bx bx-basket'></i></a></div>";
+                        }
                     }
+                }
+                                
+                if($_SERVER["REQUEST_METHOD"]=="GET"){
+                    $card='';
+                    $board='';
+                    $console='';
+                    extract($_GET);
                     
+                    $req_prod="SELECT label, prix, urltsawer from produits where  categorie='$card' or categorie='$board' or categorie='$console';";
                     if(mysqli_num_rows(mysqli_query($conn,$req_prod))> 0){
                         foreach(mysqli_query($conn,$req_prod) as $row){
                             
                             echo "<div class='box'><img src='".$row["urltsawer"]."' alt=''><h2>".$row["label"]."</h2><span>".$row["prix"]."</span><a href='#'><i class='bx bx-basket'></i></a></div>";
                         };
                     
-                    }}else{echo "ta7che";}
-                    mysqli_close($conn);
+                    }
+                }
             ?>
     </section>
     <footer class="container">
@@ -118,5 +146,6 @@
         <p>&#169; Ahmed Hamza Gwissem & Youssef Essid All Right Reserved.</p>
     </div>
     <script src="file1.js"></script>
+
     </body>
 </html>

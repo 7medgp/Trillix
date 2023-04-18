@@ -34,16 +34,16 @@
         <img src="<?php echo $btnIcon; ?>" id="btnIcon" alt="">
     </div>
     <header>
-    <div class="background-nav">
+        <div class="background-nav">
             <nav class="nav container">
                 <a href="index.php" class="logo">
                     <img src="<?php echo $logo; ?>" id="logo">
                 </a>
                 <ul class="navbar">
-                    <li><a href="index.php" class="active">Home</a></li>
-                    <li><a href="shop.php">Featured</a></li>
-                    <li><a href="shop.php">Shop</a></li>
-                    <li><a href="shop.php">New</a></li>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#featured">Featured</a></li>
+                    <li><a href="#shop">Shop</a></li>
+                    <li><a href="#new">New</a></li>
                 </ul>
                 <div class="search-bar">
                     <form action="shop.php" method="post">
@@ -52,7 +52,17 @@
                     </form>
                 </div>
                 <div class="nav-icons">
-                    <a href="#" class="user"><i class='bx bxs-user'></i></a>
+                    <?php
+                        if(array_key_exists('nom',$_SESSION)){
+                            ?>
+                            <a href="account.php"><i class='bx bxs-user'></i></a>
+                            <?php
+                        }else{
+                            ?>
+                            <a href="login.html"><i class='bx bxs-user'></i></a>
+                            <?php
+                        }
+                    ?>
                     
                     <a href="#" class="basket"><i class='bx bxs-basket'></i><span>0</span></a>
                     <i class='bx bx-menu' id="menu-icon"></i>
