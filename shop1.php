@@ -101,8 +101,9 @@
                         if($search==""){
                             $req_prod="SELECT label, prix, urltsawer from produits;";
                         }else{
-                            $req_prod="SELECT label, prix, urltsawer from produits where label='%$search%' or categorie='$search';";
+                            $req_prod="SELECT label, prix, urltsawer from produits where label='$search' or categorie='$search';";
                         }
+                        
                         if(mysqli_num_rows(mysqli_query($conn,$req_prod))> 0){
                             foreach(mysqli_query($conn,$req_prod) as $row){
                                 echo "<div class='box'><img src='".$row["urltsawer"]."' alt=''><h2>".$row["label"]."</h2><span>".$row["prix"]."</span><a href='#'><i class='bx bx-basket'></i></a></div>";

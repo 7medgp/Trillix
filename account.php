@@ -75,7 +75,10 @@
                   </script>
                 </div>
                 <button type="submit" class="btn first-btn">Save changes</button>
-                <a href="disconnect.php"><button class="btn first-btn">Disconnect</button></a>
+                <form action="index.php" method="post">
+                <button class="btn first-btn" name="disconnect">Disconnect</button>
+                </form>
+                
               </form>
               
               <a href="index.php">< back to home page</a>

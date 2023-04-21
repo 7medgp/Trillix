@@ -150,7 +150,7 @@ nav{
 	position: fixed;
 	top: 85%;
 	right: 5%;
-	z-index: 2000;
+	z-index: 10;
 	background-color: var(--main-color);
 	color: var(--text-color);
 	display: flex;

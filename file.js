@@ -27,14 +27,7 @@ btn.onclick=function(){
 }
 
 
-/*recherche bl enter*/
-let rech=document.getElementById('rech');
-rech.addEventListener("keypress",function(event){
-    if (event.key === "Enter"){
-        event.preventDefault();
-        document.getElementById("bassara").click();
-    }
-});
+
 /*menu humburger*/
 let menu=document.querySelector('#menu-icon');
 let navbar=document.querySelector('.navbar');
@@ -47,22 +40,66 @@ window.onscroll=()=>{
     menu.classList.remove('bx-x');
     navbar.classList.remove('active');
 }
-/*modal*/
-var mybtn=document.getElementById("mybtn");
-var modal=document.getElementById("modal");
-var close=document.querySelector(".close");
-var send=document.querySelector(".send");
-mybtn.onclick=function(){
-    modal.style.display="block";
+/*recherche bl enter
+let rech=document.getElementById('rech');
+rech.addEventListener("keypress",function(event){
+    if (event.key === "Enter"){
+        event.preventDefault();
+        document.getElementById("bassara").click();
+    }
+});*/
+let basketIcon=document.querySelector('#basketIcon');
+let cart=document.querySelector('.cart');
+let closeCart = document.querySelector('#close-cart');
+basketIcon.onclick=()=>{
+    cart.classList.add("active");
+};
+closeCart.onclick=()=>{
+    cart.classList.remove("active");
+};
+/*
+if (document.readyState== 'loading'){
+    document.addEventListener('DOMContentLoaded', ready);
+}else{
+    ready();
 }
-close.onclick=function(){
-    modal.style.display="none";
-}
-send.onclick=function(){
-    modal.style.display="none";
-}
-window.onclick=function(event){
-    if(event.target==modal){
-        modal.style.display="none";
+function ready(){
+    var removeCartButtons = document.getElementsByClassName('cart-remove');
+    console.log(removeCartButtons);
+    for(var i=0; i<removeCartButtons.length;i++){
+        var button=removeCartButtons[i];
+        button.addEventListener("click",removeCartItem);
+    }
+    var qtteInputs = document.getElementsByClassName('cart-qtte');
+    for (var i=0; i<qtteInputs.length;i++){
+        var input=qtteInputs[i];
+        input.addEventListener("change",qtteChanged);
     }
 }
+ function qtteChanged(event){
+        var input=event.target;
+        if(isNaN(input.value)|| input.value <=0){
+            input.value=1;
+        }
+        updatetotal();
+    }
+    
+    function removeCartItem(event){
+        var buttonClicked=event.target;
+        buttonClicked.parentElement.remove();
+        updatetotal();
+    }
+    function updatetotal(){
+        var cartContent=document.getElementsByClassName('cart-content')[0];
+        var cartboxes=cartContent.getElementsByClassName('cart-box');
+        var total=0;
+        for( var i=0; i<cartboxes.length; i++){
+            var cartbox= cartboxes[i];
+            var priceelement=cartbox.getElementsByClassName('cart-price')[0];
+            var qtteelement=cartbox.getElementsByClassName('cart-qtte')[0];
+            var qtte=qtteelement.value;
+            var price=parseFloat(priceelement.innerText.replace("$",""));
+            total= total+(price*qtte);
+            total=Math.round(total*100)/100;
+            document.getElementsByClassName("total-price")[0].innerText='$'+total;
+        }}  */
