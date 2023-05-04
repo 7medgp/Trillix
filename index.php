@@ -18,19 +18,6 @@
     $conn=mysqli_connect("localhost","root","","trillix");
     
     
-    if(isset($_POST["upd"])){
-        $id=$_SESSION['id'];
-        $hid=$_POST['hid'];
-        $qtte=$_POST['qtte'];
-        $req_upd="UPDATE panier SET quantité='$qtte'  WHERE idprod='$hid' and idclient='$id';";
-        //echo "<script>alert('".mysqli_num_rows(mysqli_query($conn,$req_rech))."');</script>";
-        if(mysqli_query($conn,$req_upd)){
-            echo "<script>alert('ok');</script>";
-        }else{
-            
-                echo "<script>alert('ta7che up');</script>";
-            }
-        }
         
             if(isset($_POST["disconnect"])){
                 session_destroy();
@@ -48,6 +35,7 @@
         <link rel="icon" href="img/Untitled-1.png" type="image/png">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+        <script src="file-js/alert.js"></script>
         <title>Trillix</title>
         <script>
             function cartAction(action,code){
@@ -59,9 +47,10 @@
                     url: "add.php",
                     data:query,
                     type: "POST",
-                    success:function(data){
+                    success:function(value){
                         let span=document.getElementById("span");
-                        span.innerHTML=data;
+                        var data=value.split(',');
+                        span.innerHTML=data[0];
                         if(action==="add"){
                             $("#add_"+code).hide();
                             $("#del_"+code).show();
@@ -76,6 +65,7 @@
                     }
                 });
             }
+            
         </script>
     </head>
     <body class="<?php echo $themeClass; ?>">
@@ -115,7 +105,14 @@
                         ?>
                         
                         <div class="basket">
-                            <a href="account.php#panier"><i class='bx bxs-basket' id="basketIcon"></i></a>
+                            <?php
+                            if(isset($_SESSION['id'])){
+                                ?><a href="account.php#panier"><i class='bx bxs-basket' id="basketIcon"></i></a><?php
+                            }else{
+                                ?><i class='bx bxs-basket' id="basketIcon" onclick="redirect()"></i><?php
+                            }
+                            ?>
+                            
                             <span id="span">
                                 <?php
                                 if(isset($_SESSION['id'])){
@@ -123,8 +120,6 @@
                                     $req="SELECT panier.*, produits.* FROM panier, produits, clients WHERE clients.idclient=panier.idclient and panier.idclient=$id and panier.idprod=produits.idprod;";
                                     if(mysqli_query($conn,$req)){
                                         echo mysqli_num_rows(mysqli_query($conn,$req));
-                                    }else{
-                                        echo "7low";
                                     }
                                 }else{
                                     echo 0;
@@ -161,13 +156,13 @@
                     <img src="img\chess.png" alt="">
                     <div class="text">
                         <h2>New Collection <br>Of Toys</h2>
-                        <a href="#">View More</a>
+                        <a href="shop.php">View More</a>
                     </div>
                 </div>
                 <div class="box">
                     <div class="text">
                         <h2>20% Discount <br>On Toys</h2>
-                        <a href="#">View More</a>
+                        <a href="shop.php">View More</a>
                     </div>
                     <img src="img\chess.png" alt="">
                 </div>
@@ -196,7 +191,7 @@
                                     if(mysqli_num_rows(mysqli_query($conn,$req))===0){
                                         ?>
                                         <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')" style="appearence: none;"><i class='bx bx-basket'></i></button>
-                                        <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"style="width:25px;background:red;display: none;"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
+                                        <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"style="display: none;"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
                                         <?php
                                         }else{
                                             ?>
@@ -246,7 +241,7 @@
                                     if(mysqli_num_rows(mysqli_query($conn,$req))===0){
                                         ?>
                                         <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')" style="appearence: none;"><i class='bx bx-basket'></i></button>
-                                        <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"style="width:25px;background:red;display: none;"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
+                                        <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"style="display: none;"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
                                         <?php
                                         }else{
                                             ?>

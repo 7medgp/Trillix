@@ -158,7 +158,7 @@ nav{
 .btn{
 	padding: 13px 26px;
 	background-color: var(--main-color);
-	color: var(--bg-color);
+	color: #F5F4F4;
 	font-weight: 400;
 	border-radius: 0.5rem;
 	border: 0;
@@ -259,7 +259,7 @@ nav{
 	width: 30%;
 	height: 100vh;
 	color: var(--text-color);
-	padding: 3rem 0;
+	padding: 5rem 0;
   }
   
   .signup-login h2 {
@@ -296,4 +296,102 @@ nav{
 }
 .half-space a:hover{
 	color: var(--main-color);
+}
+#panier{
+	padding: 50px;
+
+}
+#panier .cart-title{
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin-top: 2rem;
+}
+#panier .cart-content{
+	position: relative;
+	display: block;
+	padding: 10px;
+	
+	
+}
+#panier .cart-box{
+	display: grid;
+	grid-template-columns: 32% 50% 18%;
+	border-radius: 0.5rem;
+	box-shadow: 1px 2px 4px var(--shadow-color);
+	align-items: center;
+	gap: 1rem;
+	margin-top: 1rem;
+	padding: 10px;
+}
+.cart-img{
+	width: 100px;
+	height: 100px;
+	object-fit: contain;
+	object-position: center;
+	background-color: var(--blue-color);
+	border-radius: 0.5rem;
+	position: relative;
+}
+.detail-box{
+	display: grid;
+	row-gap: 0.5rem;
+	margin-left: 10px;
+}
+.cart-product-title{
+	font-size: 1rem;
+	text-transform: uppercase;
+}
+.cart-price{
+	font-weight: 500;
+}
+.cart-qtte{
+	border: 1px solid var(--text-color);
+	outline-color: var(--main-color);
+	width: 2.4rem;
+	text-align: center;
+	font-size: 1rem;
+}
+.delete{
+	background: transparent;
+	border: 0;
+}
+.delete .bx{
+
+	
+	padding: 10px;
+	font-size: 20px;
+	background: var(--main-color);
+	color:#f5f4f4;
+	border-radius: 0.5rem;
+	transition: 0.5s;
+}
+.total{
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1.5rem;
+	border-top: 1px solid var(--text-color);
+}
+.total-title{
+	font-size: 1rem;
+	font-weight: 600;
+}
+.total-price{
+margin-left: 0.5rem; 
+}
+.btn-buy{
+	display: flex;
+	margin: 1.5rem auto 0 auto;
+	padding: 12px 20px ;
+	border: none;
+	border-radius: 20px;
+	background: var(--main-color);
+	color: #F5F4F4;
+	font-size: 1rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: 0.4s;
+}
+.btn-buy:hover{
+	background: var(--main-light-color);
 }

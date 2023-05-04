@@ -40,23 +40,21 @@ window.onscroll=()=>{
     menu.classList.remove('bx-x');
     navbar.classList.remove('active');
 }
-/*recherche bl enter
+//recherche bl enter
 let rech=document.getElementById('rech');
 rech.addEventListener("keypress",function(event){
     if (event.key === "Enter"){
         event.preventDefault();
         document.getElementById("bassara").click();
     }
-});*/
-let basketIcon=document.querySelector('#basketIcon');
-let cart=document.querySelector('.cart');
-let closeCart = document.querySelector('#close-cart');
-basketIcon.onclick=()=>{
-    cart.classList.add("active");
-};
-closeCart.onclick=()=>{
-    cart.classList.remove("active");
-};
+});
+function redirect(){
+    Swal.fire('You have to connect first','error','error');
+        function ab3th(){
+            window.location.href = "login-signup/login.php";
+        }
+        window.setTimeout(ab3th,1000);
+}
 /*
 if (document.readyState== 'loading'){
     document.addEventListener('DOMContentLoaded', ready);

@@ -16,48 +16,6 @@
       $tile ="img/tile.png";
   }
   $conn=mysqli_connect("localhost","root","","trillix");
-  if(isset($_POST["add"])){
-      $hid=$_POST['hid'];
-      $id=$_SESSION['id'];
-      $req_rech="SELECT * FROM panier WHERE idprod='$hid' and idclient='$id';";
-      //echo "<script>alert('".mysqli_num_rows(mysqli_query($conn,$req_rech))."');</script>";
-      if(mysqli_num_rows(mysqli_query($conn,$req_rech))>0){
-          echo "<script>alert('mawjoud');</script>";
-      }else{
-          $id=$_SESSION['id'];
-          $req_add="INSERT INTO panier values('$id','$hid','1');";
-          if(mysqli_query($conn,$req_add)){
-              echo "<script>alert('succes');</script>";
-          }else{
-              echo "<script>alert('ta7che');</script>";
-          }
-      }
-  }
-  if(isset($_POST["upd"])){
-      $id=$_SESSION['id'];
-      $hid=$_POST['hid'];
-      $qtte=$_POST['qtte'];
-      $req_upd="UPDATE panier SET quantité='$qtte'  WHERE idprod='$hid' and idclient='$id';";
-      //echo "<script>alert('".mysqli_num_rows(mysqli_query($conn,$req_rech))."');</script>";
-      if(mysqli_query($conn,$req_upd)){
-          echo "<script>alert('ok');</script>";
-      }else{
-          
-              echo "<script>alert('ta7che up');</script>";
-          }
-      }
-      if(isset($_POST["del"])){
-          $id=$_SESSION['id'];
-          $hid=$_POST['hid'];
-          $req_del="DELETE FROM panier WHERE idprod='$hid' and idclient='$id';";
-          //echo "<script>alert('".mysqli_num_rows(mysqli_query($conn,$req_rech))."');</script>";
-          if(mysqli_query($conn,$req_del)){
-              echo "<script>alert('tfassakh');</script>";
-          }else{
-              
-                  echo "<script>alert('ta7che del');</script>";
-              }
-          }
     
 ?>
 <!DOCTYPE html>
@@ -66,11 +24,42 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="stylegeneral.css">
-        <link rel="stylesheet" href="styleshop.css">
+        <link rel="stylesheet" href="css-sheets/stylegeneral.css">
+        <link rel="stylesheet" href="css-sheets/styleshop.css">
         <link rel="icon" href="img/Untitled-1.png" type="image/png">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+        <script src="file-js/alert.js"></script>
         <title>Trillix</title>
+        <script>
+            function cartAction(action,code){
+                var query="";
+                if(action!=""){
+                    query= 'action='+action+'&code='+code;
+                }
+                jQuery.ajax({
+                    url: "add.php",
+                    data:query,
+                    type: "POST",
+                    success:function(value){
+                        let span=document.getElementById("span");
+                        var data=value.split(',');
+                        span.innerHTML=data[0];
+                        if(action==="add"){
+                            $("#add_"+code).hide();
+                            $("#del_"+code).show();
+                        }else{
+                            $("#add_"+code).show();
+                            $("#del_"+code).hide();
+                        }
+                        
+                    },
+                    error: function(){
+                        alert("mch 9a3da takhtef");
+                    }
+                });
+            }
+        </script>
     </head>
     <body class="<?php echo $themeClass; ?>">
     <div class="toggle-btn" id="btn">
@@ -103,157 +92,36 @@
                             <?php
                         }else{
                             ?>
-                            <a href="login.html"><i class='bx bxs-user'></i></a>
+                            <a href="login.php"><i class='bx bxs-user'></i></a>
                             <?php
                         }
                     ?>
                     
-                    <div class="basket"><i class='bx bxs-basket' id="basketIcon"></i><span>0</span></div>
-                    <div class="cart">
-                        <h2 class="cart-title">Your cart</h2>
-                        <div class="cart-content">
-                            <div class="cart-box">
-                                <?php 
-                                    $conn=mysqli_connect("localhost","root","","trillix");
-                                    if(isset($_SESSION['id'])){
-                                        $id=$_SESSION['id'];
-                                            $req_pan="SELECT urltsawer,label,prix,panier.idclient,panier.idprod,panier.quantité FROM panier, produits, clients WHERE panier.idprod=produits.idprod and panier.idclient=clients.idclient and panier.idclient='$id';";
-                                        if(mysqli_num_rows(mysqli_query($conn,$req_pan))>0){
-                                            foreach(mysqli_query($conn,$req_pan) as $row){
-                                                ?>
-                                                <img src="<?php echo $row['urltsawer'];?>" alt="" class="cart-img">
-                                                <div class="detail-box">
-                                                    <div class="cart-product-title"><?php echo $row['label'];?></div>
-                                                    <div class="cart-price"><?php echo $row['prix'];?></div>
-                                                    <form action="shop.php?action=upd&id=<?php echo $row["idclient"]; ?>" method="post">
-                                                        <input type="number" name="qtte" class="cart-qtte" value="<?php echo $row['quantité'];?>" min="1" max="5">
-                                                        <input type="hidden" name="hid" value="<?php echo $row['idprod'];?>">
-                                                        <button name="upd" type="submit">confirm qtte</button>
-                                                    </form>
-                                                </div>
-                                                <form action="shop.php?action=sup&id=<?php echo $row["idclient"]; ?>" method="post">
-                                                    <input type="hidden" name="hid" value="<?php echo $row['idprod'];?>">
-                                                    <button name="del" type="submit" style="width:25px;background:red;"><i class='bx bxs-trash cart-remove'></i></button>
-                                                </form>
-                                                <?php
-                                            }
-                                        }
+                    <div class="basket">
+                            <?php
+                            if(isset($_SESSION['id'])){
+                                ?><a href="account.php#panier"><i class='bx bxs-basket' id="basketIcon"></i></a><?php
+                            }else{
+                                ?><i class='bx bxs-basket' id="basketIcon" onclick="redirect()"></i><?php
+                            }
+                            ?>
+                            
+                            <span id="span">
+                                <?php
+                                if(isset($_SESSION['id'])){
+                                    $id=$_SESSION['id'];
+                                    $req="SELECT panier.*, produits.* FROM panier, produits, clients WHERE clients.idclient=panier.idclient and panier.idclient=$id and panier.idprod=produits.idprod;";
+                                    if(mysqli_query($conn,$req)){
+                                        echo mysqli_num_rows(mysqli_query($conn,$req));
                                     }
-                                    else{
-                                        echo "ther's noting";
-                                    }
+                                }else{
+                                    echo 0;
+                                }
+                                
                                 ?>
-                            </div>
+                            </span>
                         </div>
-                        <div class="total">
-                            <div class="total-title">Total</div>
-                            <div class="total-price">0</div>
-                        </div>
-                        <button type="button" class="btn-buy">buy Now</button>
-                        <i class='bx bx-x' id="close-cart"></i>
-                        <style>
-                            .cart{
-                                position: fixed;
-                                top: 0;
-                                right: -100%;
-                                min-height: 100vh;
-                                width: 20%;
-                                padding: 20px;
-                                background: var(--bg-color);
-                                box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
-                                transition: 0.4s;
-                                z-index: 100;
-                            }
-                            .cart.active{
-                                right: 0;
-                            }
-                            .cart-title{
-                                text-align: center;
-                                font-size: 1.5rem;
-                                font-weight: 600;
-                                margin-top: 2rem;
-                            }
-                            .cart-content{
-                                position: relative;
-                                display: block;
-                                padding: 10px;
-	                            border-radius: 0.5rem;
-	                            box-shadow: 1px 2px 4px rgb(15 54 55 / 10%);
-                            }
-                            .cart-box{
-                                display: grid;
-                                grid-template-columns: 32% 50% 18%;
-                                align-items: center;
-                                gap: 1rem;
-                                margin-top: 1rem;
-                               
-                            }
-                            .cart-img{
-                                width: 100px;
-                                height: 100px;
-                                object-fit: contain;
-                                object-position: center;
-                                background-color: var(--blue-color);
-                                border-radius: 0.5rem;
-                                position: relative;
-                            }
-                            .detail-box{
-                                display: grid;
-                                row-gap: 0.5rem;
-                                margin-left: 10px;
-                            }
-                            .cart-product-title{
-                                font-size: 1rem;
-                                text-transform: uppercase;
-                            }
-                            .cart-price{
-                                font-weight: 500;
-                            }
-                            .cart-qtte{
-                                border: 1px solid var(--text-color);
-                                outline-color: var(--main-color);
-                                width: 2.4rem;
-                                text-align: center;
-                                font-size: 1rem;
-                            }
-                            .total{
-                                display: flex;
-                                justify-content: flex-end;
-                                margin-top: 1.5rem;
-                                border-top: 1px solid var(--text-color);
-                            }
-                            .total-title{
-                                font-size: 1rem;
-                                font-weight: 600;
-                            }
-                            .total-price{
-                               margin-left: 0.5rem; 
-                            }
-                            .btn-buy{
-                                display: flex;
-                                margin: 1.5rem auto 0 auto;
-                                padding: 12px 20px ;
-                                border: none;
-                                border-radius: 20px;
-                                background: var(--main-color);
-                                color: #F5F4F4;
-                                font-size: 1rem;
-                                font-weight: 500;
-                                cursor: pointer;
-                                transition: 0.4s;
-                            }
-                            .btn-buy:hover{
-                                background: var(--main-light-color);
-                            }
-                            #close-cart{
-                                position: absolute;
-                                top: 1rem;
-                                right: 0.8rem;
-                                font-size: 2rem;
-                                color: var(--text-color);
-                                cursor: pointer;
-                            }
-                        </style>
+                        
                     </div>
                     <i class='bx bx-menu' id="menu-icon"></i>
                 </div>
@@ -278,26 +146,78 @@
                      
                      if(mysqli_num_rows(mysqli_query($conn,$req_prod))> 0){
                          foreach(mysqli_query($conn,$req_prod) as $row){
-                             echo "<div class='box'><img src='".$row["urltsawer"]."' alt=''><h2>".$row["label"]."</h2><span>".$row["prix"]."</span><a href='javascript:koffa()'><i class='bx bx-basket'></i></a></div>";
+                             ?> <div class='box'>
+                             <form id="fromcart">
+                                 <img src='<?php echo $row["urltsawer"]; ?>' alt=''>
+                                 <h2><?php echo $row["label"];?></h2>
+                                 <span><?php echo $row["prix"];?></span>
+                             <?php
+                             if(isset($_SESSION['id'])){
+                                 $hid=$row['idprod'];
+                                 $req="SELECT * FROM panier WHERE panier.idclient='$id' and panier.idprod='$hid';";
+                                 if(mysqli_num_rows(mysqli_query($conn,$req))===0){
+                                     ?>
+                                     <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')" style="appearence: none;"><i class='bx bx-basket'></i></button>
+                                     <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"style="display: none;"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
+                                     <?php
+                                     }else{
+                                         ?>
+                                         <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')"style="display: none"><i class='bx bx-basket'></i></button>
+                                         <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
+                                         <?php
+                                 }
+                             }else{
+                                 ?>
+                                 <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')"><i class='bx bx-basket'></i></button>
+                                 <?php
+                                 
+                             }
+                             
+                             ?>
+                         
+                             </form>
+                         </div>
+                         <?php
                          }
                      }else{
-                             echo "</div>no result for '".$search."'<br>";
-                             echo "<h3><strong><a href='shop.php' style='color:var(--text-color);'>Perhaps you find this intressting</a></strong></h3>";
+                             echo "</div><div style='position: relative;top: 20% ;left :20%;'>no result for '".$search."'<br>";
+                             echo "<h3><strong><a href='shop.php' style='color:var(--text-color);'>Perhaps you find this intressting</a></strong></h3></div>";
                              $req_prod="SELECT * from produits;";
                              echo "<div class='shop-container container'>";
                              if(mysqli_num_rows(mysqli_query($conn,$req_prod))> 0){
                                 foreach(mysqli_query($conn,$req_prod) as $row){
                                     ?>
-                                    <div class='box'>
-                                        <form action="shop.php?action=add&id=<?php echo $row["idprod"];?>" method="post">
-                                            <img src='<?php echo $row["urltsawer"]; ?>' alt=''>
-                                            <h2><?php echo $row["label"];?></h2>
-                                            <span><?php echo $row["prix"];?></span>
-                                            <input type="hidden" name="hid" value="<?php echo $row['idprod'];?>">
-                                            
-                                            <button type="submit" name="add"><i class='bx bx-basket'></i></button>
-                                        </form>
-                                    </div>
+                                     <div class='box'>
+                                <form id="fromcart">
+                                    <img src='<?php echo $row["urltsawer"]; ?>' alt=''>
+                                    <h2><?php echo $row["label"];?></h2>
+                                    <span><?php echo $row["prix"];?></span>
+                                <?php
+                                if(isset($_SESSION['id'])){
+                                    $hid=$row['idprod'];
+                                    $req="SELECT * FROM panier WHERE panier.idclient='$id' and panier.idprod='$hid';";
+                                    if(mysqli_num_rows(mysqli_query($conn,$req))===0){
+                                        ?>
+                                        <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')" style="appearence: none;"><i class='bx bx-basket'></i></button>
+                                        <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"style="display: none;"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
+                                        <?php
+                                        }else{
+                                            ?>
+                                            <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')"style="display: none"><i class='bx bx-basket'></i></button>
+                                            <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
+                                            <?php
+                                    }
+                                }else{
+                                    ?>
+                                    <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')"><i class='bx bx-basket'></i></button>
+                                    <?php
+                                    
+                                }
+                                
+                                ?>
+                            
+                                </form>
+                            </div>
                                     <?php
                                 };
                             
@@ -307,6 +227,9 @@
                      $card='';
                      $board='';
                      $console='';
+                     $boy='';
+                     $girl='';
+                     $lego='';
                      $tri='';
                      extract($_POST);
 
@@ -315,10 +238,10 @@
                      }else{
                          $sort="";
                      }
-                     if(($card=='')&&($board=='')&&($console=='')){
+                     if(($card=='')&&($board=='')&&($console=='')&&($boy=='')&&($girl=='')&&($lego=='')){
                          $condition="";
                      }else{
-                         $condition="where  categorie='$card' or categorie='$board' or categorie='$console'";
+                         $condition="where  categorie='$card' or categorie='$board' or categorie='$console'or categorie='$boy' or categorie='$girl' or categorie='$lego'";
                      }
                      $req_prod="SELECT * from produits $condition $sort;";
 
@@ -327,14 +250,35 @@
                      if(mysqli_num_rows($res)> 0){
                         foreach($res as $row){
                             ?>
-                            <div class='box'>
-                                <form action="shop.php?action=add&id=<?php echo $row["idprod"];?>" method="post">
+                             <div class='box'>
+                                <form id="fromcart">
                                     <img src='<?php echo $row["urltsawer"]; ?>' alt=''>
                                     <h2><?php echo $row["label"];?></h2>
                                     <span><?php echo $row["prix"];?></span>
-                                    <input type="hidden" name="hid" value="<?php echo $row['idprod'];?>">
+                                <?php
+                                if(isset($_SESSION['id'])){
+                                    $hid=$row['idprod'];
+                                    $req="SELECT * FROM panier WHERE panier.idclient='$id' and panier.idprod='$hid';";
+                                    if(mysqli_num_rows(mysqli_query($conn,$req))===0){
+                                        ?>
+                                        <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')" style="appearence: none;"><i class='bx bx-basket'></i></button>
+                                        <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"style="display: none;"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
+                                        <?php
+                                        }else{
+                                            ?>
+                                            <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')"style="display: none"><i class='bx bx-basket'></i></button>
+                                            <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
+                                            <?php
+                                    }
+                                }else{
+                                    ?>
+                                    <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')"><i class='bx bx-basket'></i></button>
+                                    <?php
                                     
-                                    <button type="submit" name="add"><i class='bx bx-basket'></i></button>
+                                }
+                                
+                                ?>
+                            
                                 </form>
                             </div>
                             <?php
@@ -347,13 +291,34 @@
                         foreach(mysqli_query($conn,$req_prod) as $row){
                             ?>
                             <div class='box'>
-                                <form action="shop.php?action=add&id=<?php echo $row["idprod"];?>" method="post">
+                                <form id="fromcart">
                                     <img src='<?php echo $row["urltsawer"]; ?>' alt=''>
                                     <h2><?php echo $row["label"];?></h2>
                                     <span><?php echo $row["prix"];?></span>
-                                    <input type="hidden" name="hid" value="<?php echo $row['idprod'];?>">
+                                <?php
+                                if(isset($_SESSION['id'])){
+                                    $hid=$row['idprod'];
+                                    $req="SELECT * FROM panier WHERE panier.idclient='$id' and panier.idprod='$hid';";
+                                    if(mysqli_num_rows(mysqli_query($conn,$req))===0){
+                                        ?>
+                                        <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')" style="appearence: none;"><i class='bx bx-basket'></i></button>
+                                        <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"style="display: none;"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
+                                        <?php
+                                        }else{
+                                            ?>
+                                            <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')"style="display: none"><i class='bx bx-basket'></i></button>
+                                            <button name="del" type="button" id="del_<?php echo $row['idprod'];?>"><i class='bx bxs-trash cart-remove' onclick="cartAction('del',<?php echo $row['idprod'];?>)"></i></button>
+                                            <?php
+                                    }
+                                }else{
+                                    ?>
+                                    <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')"><i class='bx bx-basket'></i></button>
+                                    <?php
                                     
-                                    <button type="submit" name="add"><i class='bx bx-basket'></i></button>
+                                }
+                                
+                                ?>
+                            
                                 </form>
                             </div>
                             <?php
@@ -370,7 +335,10 @@
                         <legend style="margin: 0 0 10px 0;"><h3 style="margin: 0 0 0 10px;">Categories </h3></legend>
                         <label style="display: block; margin-left:20px;"><input type="checkbox" name="card" value="card" form="check"  id="cat">Cards</label>
                         <label style="display: block; margin-left:20px;"><input type="checkbox" name="board" value="board game" form="check"  id="cat">Board Game</label>
-                        <label style="display: block; margin-left:20px;"><input type="checkbox" name="console" value="console" form="check" id="cat">Console</label> 
+                        <label style="display: block; margin-left:20px;"><input type="checkbox" name="console" value="console" form="check" id="cat">Console</label>
+                        <label style="display: block; margin-left:20px;"><input type="checkbox" name="boy" value="garçon" form="check" id="cat">Boy Games</label>
+                        <label style="display: block; margin-left:20px;"><input type="checkbox" name="girl" value="fille" form="check" id="cat">Girl Games</label>   
+                        <label style="display: block; margin-left:20px;"><input type="checkbox" name="lego" value="lego" form="check" id="cat">lego</label>  
                     </fieldset>
                     <fieldset style="margin: 0 10px 10px 0;border-radius: 20px;">
                         <legend style="margin: 0 0 10px 0;"><h3 style="margin: 0 0 0 10px;">Sort by </h3></legend>
@@ -412,7 +380,7 @@
     <div class="copyright">
         <p>&#169; Ahmed Hamza Gwissem & Youssef Essid All Right Reserved.</p>
     </div>
-    <script src="file1.js"></script>
+    <script src="file-js/file1.js"></script>
 
     </body>
 </html>

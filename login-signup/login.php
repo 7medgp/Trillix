@@ -6,7 +6,7 @@
          $btntext="Light";
         
      }else{
-         $btnIcon="img/bxs-moon (1).png";
+         $btnIcon="../img/bxs-moon (1).png";
          $btntext="Dark";
          
      }
