@@ -17,11 +17,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../stylesignup.css">
-    <link rel="stylesheet" href="../stylegeneral.css">
+    <link rel="stylesheet" href="../css-sheets/stylesignup.css">
+    <link rel="stylesheet" href="../css-sheets/stylegeneral.css">
     <link rel="icon" href="img/Untitled-1.png" type="image/png">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="alert.js"></script>
+    <script src="../file-js/alert.js"></script>
     <title>Trillix</title>
 </head>
 <body class="<?php echo $themeClass; ?>">
@@ -70,7 +70,7 @@
           </div>
           
     </section>
-    <script src="file2.js"></script>
+    <script src="../file-js/file2.js"></script>
   </body>
 
 </html>
