@@ -99,7 +99,11 @@ form .form-elements {
 	font-weight: 500;
 	color: var(--main-color);
 }
-.shop-container .box .bx{
+.shop-container .box button{
+	width:0px;
+	height: 0px;	
+}
+.shop-container .box button .bx{
 	position: absolute;
 	bottom: 1rem;
 	right: 0.8rem;
@@ -110,9 +114,8 @@ form .form-elements {
 	border-radius: 0.5rem;
 	transition: 0.5s;
 }
-.shop-container .box .bx:hover{
-	background: var(--main-light-color);
-	
+.shop-container .box button .bx:hover{
+	background: var(--main-light-color);	
 }
 
 
