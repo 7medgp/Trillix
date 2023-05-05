@@ -229,7 +229,10 @@
         <div class="total-title">Total</div>
         <div class="total-price" id="total"><?php echo $total;?></div>
     </div>
-    <button type="button" class="btn-buy">buy Now</button>
+    <form action="index1.php" method="post">
+      <button type="submit" class="btn-buy">buy Now</button>
+    </form>
+    
       </section>
       <footer class="container">
             <div class="footer-box">
