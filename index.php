@@ -1,27 +1,41 @@
 <?php
-    session_start();
-    $themeClass = '';
-    if (!empty($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
-        $themeClass = 'dark-theme';
-        $btnIcon="img/bxs-sun.png";
-        $btntext="Light";
-        $logo ="img/bl title.white.png";
-        $logo1 ="img/bl title.white.png";
-        $tile ="img/tile.white.png";
-    }else{
-        $btnIcon="img/bxs-moon (1).png";
-        $btntext="Dark";
-        $logo ="img/bl title.png";
-        $logo1 ="img/bl title.png";
-        $tile ="img/tile.png";
+if(isset($_POST["disconnect"])){
+    if (isset($_SERVER['HTTP_COOKIE'])) {
+        $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+        foreach($cookies as $cookie) {
+            $parts = explode('=', $cookie);
+            $name = trim($parts[0]);
+            setcookie($name, '', time()-1000);
+            setcookie($name, '', time()-1000, '/');
+        }
     }
-    $conn=mysqli_connect("localhost","root","","trillix");
+    session_destroy();
+    header("location: index.php");   
+}
+session_start();
+$themeClass = '';
+if (!empty($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
+    $themeClass = 'dark-theme';
+    $btnIcon="img/bxs-sun.png";
+    $btntext="Light";
+    $logo ="img/bl title.white.png";
+    $logo1 ="img/bl title.white.png";
+    $tile ="img/tile.white.png";
+}else{
+    $btnIcon="img/bxs-moon (1).png";
+    $btntext="Dark";
+    $logo ="img/bl title.png";
+    $logo1 ="img/bl title.png";
+    $tile ="img/tile.png";
+}
+
+$conn=mysqli_connect("localhost","root","","trillix");
+     
+
     
     
         
-            if(isset($_POST["disconnect"])){
-                session_destroy();
-            }
+            
 ?>
 <!DOCTYPE html>
 <html lang="en">

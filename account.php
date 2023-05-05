@@ -183,12 +183,13 @@
                     }
                   </script>
                 </div>
-                <button type="submit" class="btn first-btn">Save changes</button>
-                <form action="index.php" method="post">
-                <button class="btn first-btn" name="disconnect">Disconnect</button>
-                </form>
+                <button type="submit" class="btn first-btn" name="save">Save changes</button>
+                
                 
               </form>
+              <form action="index.php" name="disconnect" method="post">
+                  <button class="btn first-btn" name="disconnect">Disconnect</button>
+                </form>
               
               <a href="index.php">< back to home page</a>
             </div>
@@ -253,8 +254,8 @@
                 <a href="index.php">Home</a>
                 <a href="shop.php">Shop</a>
                 <a href="aboutus.php">About Us</a>
-                <a href="fuck.php">Contact Us</a>
-                <a href="faq.html">FAQ's</a>
+                <a href="">Contact Us</a>
+                <a href="">FAQ's</a>
             </div> 
         </footer>
         <div class="copyright">
@@ -265,7 +266,7 @@
 </html>
 <?php
 
-    if($_POST){
+    if(isset($_POST['save'])){
         $conn=mysqli_connect("localhost","root","","trillix");
         if(!($conn)){
             die("Connection failed ". mysqli_connect_error());
@@ -304,10 +305,8 @@
                 </script>
                 <?php
               }
-            }
-            
-                
-                
-            
+            }      
     }
+    
+  
 ?>
