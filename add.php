@@ -10,7 +10,7 @@
             case "add":
                 $req_rech="SELECT * FROM panier WHERE idprod='$hid' and idclient ='$id'";
                 if(mysqli_num_rows(mysqli_query($conn,$req_rech))===0){
-                        $req_add="INSERT INTO panier values('$id','$hid','1','non');";
+                        $req_add="INSERT  INTO panier(idclient, idprod,quantité) values($id,$hid,'1');";
                         if(mysqli_query($conn,$req_add)){
                            $hint+=1;
                         }else{
