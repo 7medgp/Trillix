@@ -105,7 +105,7 @@
                                 <?php
                             }else{
                                 ?>
-                                <a href="login-signup/login.php"><i class='bx bxs-user'></i></a>
+                                <a href="../login-signup/login.php"><i class='bx bxs-user'></i></a>
                                 <?php
                             }
                         ?>

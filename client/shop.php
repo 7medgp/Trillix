@@ -67,37 +67,37 @@
         <img src="<?php echo $btnIcon; ?>" id="btnIcon" alt="">
     </div>
     <header>
-        <div class="background-nav">
-            <nav class="nav container">
-                <a href="index.php" class="logo">
-                    <img src="<?php echo $logo; ?>" id="logo">
-                </a>
-                <ul class="navbar">
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#featured">Featured</a></li>
-                    <li><a href="#shop">Shop</a></li>
-                    <li><a href="#new">New</a></li>
-                </ul>
-                <div class="search-bar">
-                    <form action="shop.php" method="post">
-                        <input type="text" placeholder="What are you looking for?" name="search">
-                        <button type="submit" class="btnsubmit" name="ba7th" style="background: var(--main-color);color: #F5F4F4;cursor: pointer;transition: 0.4s;border:0;"><i class='bx bx-search'></i></button>
-                    </form>
-                </div>
-                <div class="nav-icons">
-                    <?php
-                        if(array_key_exists('nom',$_SESSION)){
-                            ?>
-                            <a href="account.php"><i class='bx bxs-user'></i></a>
-                            <?php
-                        }else{
-                            ?>
-                            <a href="login.php"><i class='bx bxs-user'></i></a>
-                            <?php
-                        }
-                    ?>
-                    
-                    <div class="basket">
+            <div class="background-nav">
+                <nav class="nav container">
+                    <a href="#" class="logo">
+                        <img src="<?php echo $logo; ?>" id="logo">
+                    </a>
+                    <ul class="navbar">
+                        <li><a href="#home" class="active">Home</a></li>
+                        <li><a href="#featured">Featured</a></li>
+                        <li><a href="#shop">Shop</a></li>
+                        <li><a href="#new">New</a></li>
+                    </ul>
+                    <div class="search-bar">
+                        <form action="shop.php" method="post">
+                            <input type="text" placeholder="What are you looking for?" name="search">
+                            <button type="submit" class="btnsubmit" name="ba7th"style="background: var(--main-color);color: #F5F4F4;cursor: pointer;transition: 0.4s;border:0;"><i class='bx bx-search'></i></button>
+                        </form>
+                    </div>
+                    <div class="nav-icons">
+                        <?php
+                            if(array_key_exists('nom',$_SESSION)){
+                                ?>
+                                <a href="account.php#signup-login"><i class='bx bxs-user'></i></a>
+                                <?php
+                            }else{
+                                ?>
+                                <a href="../login-signup/login.php"><i class='bx bxs-user'></i></a>
+                                <?php
+                            }
+                        ?>
+                        
+                        <div class="basket">
                             <?php
                             if(isset($_SESSION['id'])){
                                 ?><a href="account.php#panier"><i class='bx bxs-basket' id="basketIcon"></i></a><?php
@@ -122,11 +122,11 @@
                             </span>
                         </div>
                         
+                        <i class='bx bx-menu' id="menu-icon"></i>
                     </div>
-                    <i class='bx bx-menu' id="menu-icon"></i>
-                </div>
-            </nav>
-        </div>
+                </nav>
+            </div>
+        </header>>
     </header>
     <section class="shop" id="shop">
         <div class="heading">

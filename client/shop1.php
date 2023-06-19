@@ -36,7 +36,7 @@
         <header>
             <div class="background-nav">
                 <nav class="nav container">
-                    <a href="index.php" class="logo">
+                    <a href="#" class="logo">
                         <img src="<?php echo $logo; ?>" id="logo">
                     </a>
                     <ul class="navbar">
@@ -46,25 +46,49 @@
                         <li><a href="#new">New</a></li>
                     </ul>
                     <div class="search-bar">
-                        <form action="shop1.php" method="post">
+                        <form action="shop.php" method="post">
                             <input type="text" placeholder="What are you looking for?" name="search">
-                            <button type="submit" class="btnsubmit" style="background: var(--main-color);color: #F5F4F4;cursor: pointer;transition: 0.4s;border:0;"><i class='bx bx-search'></i></button>
+                            <button type="submit" class="btnsubmit" name="ba7th"style="background: var(--main-color);color: #F5F4F4;cursor: pointer;transition: 0.4s;border:0;"><i class='bx bx-search'></i></button>
                         </form>
                     </div>
                     <div class="nav-icons">
                         <?php
                             if(array_key_exists('nom',$_SESSION)){
                                 ?>
-                                <a href="account.php"><i class='bx bxs-user'></i></a>
+                                <a href="account.php#signup-login"><i class='bx bxs-user'></i></a>
                                 <?php
                             }else{
                                 ?>
-                                <a href="login.html"><i class='bx bxs-user'></i></a>
+                                <a href="../login-signup/login.php"><i class='bx bxs-user'></i></a>
                                 <?php
                             }
                         ?>
                         
-                        <a href="#" class="basket"><i class='bx bxs-basket'></i><span>0</span></a>
+                        <div class="basket">
+                            <?php
+                            if(isset($_SESSION['id'])){
+                                ?><a href="account.php#panier"><i class='bx bxs-basket' id="basketIcon"></i></a><?php
+                            }else{
+                                ?><i class='bx bxs-basket' id="basketIcon" onclick="redirect()"></i><?php
+                            }
+                            ?>
+                            
+                            <span id="span">
+                                <?php
+                                if(isset($_SESSION['id'])){
+                                    $id=$_SESSION['id'];
+                                    $req="SELECT panier.*, produits.* FROM panier, produits, clients WHERE clients.idclient=panier.idclient and panier.idclient=$id and panier.idprod=produits.idprod;";
+                                    if(mysqli_query($conn,$req)){
+                                        echo mysqli_num_rows(mysqli_query($conn,$req));
+                                    }
+                                }else{
+                                    echo 0;
+                                }
+                                
+                                ?>
+                            </span>
+                        </div>
+                        
                         <i class='bx bx-menu' id="menu-icon"></i>
                     </div>
                 </nav>

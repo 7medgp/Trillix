@@ -9,7 +9,6 @@ btn.onclick=function(){
     if( document.body.classList.contains("dark-theme")){
         btnIcon.src="../img/bxs-sun.png";
         btntext.innerHTML="Light";
-        
         theme='dark';
     }else{
         btnIcon.src="../img/bxs-moon (1).png";
@@ -22,7 +21,7 @@ btn.onclick=function(){
 function redirect(){
     Swal.fire('You have to connect first','error','error');
         function ab3th(){
-            window.location.href = "login-signup/login.php";
+            window.location.href = "../login-signup/login.php";
         }
         window.setTimeout(ab3th,1000);
 }

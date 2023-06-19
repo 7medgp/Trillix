@@ -2,11 +2,11 @@
      $themeClass = '';
      if (!empty($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
          $themeClass = 'dark-theme';
-         $btnIcon="../img/bxs-sun.png";
+         $btnIcon="../client/img/bxs-sun.png";
          $btntext="Light";
         
      }else{
-         $btnIcon="../img/bxs-moon (1).png";
+         $btnIcon="../client/img/bxs-moon (1).png";
          $btntext="Dark";
          
      }
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../css-sheets/stylegeneral.css">
     <link rel="icon" href="../img/Untitled-1.png" type="image/png">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="../file-js/alert.js"></script>
+    <script src="../client/file-js/alert.js"></script>
     <title>Trillix</title>
 </head>
 <body class="<?php echo $themeClass; ?>">
@@ -51,7 +51,7 @@
         </div>
       </div>
     </section>
-    <script src="../file-js/file2.js"></script>
+    <script src="../client/file-js/file2.js"></script>
   </body>
 </html>
 <?php
@@ -79,16 +79,31 @@
                 $_SESSION['mdp']=$res['mdp'];
                 $_SESSION['ville']=$res['ville'];
                 $_SESSION['tel']=$res['tel'];
-                ?>
-                <script>
+                if($res['Admin']==0){
+                  ?>
+                  <script>
+                      
+                      Swal.fire('You are now connected','success','success');
+                      function ab3th(){
+                          window.location.href = "../client/index.php";
+                      }
+                      window.setTimeout(ab3th,2500);
+                  </script>
+                <?php
+                }else{
+                  ?>
+                  <script>
                     
-                    Swal.fire('You are now connected','success','success');
+                    Swal.fire('Welcome <?php echo $_SESSION['prenom'];?>','success','success');
                     function ab3th(){
-                        window.location.href = "../index.php";
+                        window.location.href = "../admin/index.php";
                     }
                     window.setTimeout(ab3th,2500);
                 </script>
-                <?php
+                  
+                  <?php
+                }
+                
                 
             }else{
                 

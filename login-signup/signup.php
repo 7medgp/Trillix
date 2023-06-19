@@ -2,11 +2,11 @@
      $themeClass = '';
      if (!empty($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
          $themeClass = 'dark-theme';
-         $btnIcon="img/bxs-sun.png";
+         $btnIcon="../client/img/bxs-sun.png";
          $btntext="Light";
         
      }else{
-         $btnIcon="img/bxs-moon (1).png";
+         $btnIcon="../client/img/bxs-moon (1).png";
          $btntext="Dark";
          
      }
@@ -70,7 +70,7 @@
           </div>
           
     </section>
-    <script src="../file-js/file2.js"></script>
+    <script src="../client/file-js/file2.js"></script>
   </body>
 
 </html>

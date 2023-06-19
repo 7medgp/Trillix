@@ -6,7 +6,7 @@ let logo1=document.getElementById("logo2");
 function redirect(){
     Swal.fire('You have to connect first','error','error');
         function ab3th(){
-            window.location.href = "login-signup/login.php";
+            window.location.href = "../login-signup/login.php";
         }
         window.setTimeout(ab3th,1000);
 }
