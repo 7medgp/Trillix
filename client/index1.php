@@ -12,8 +12,35 @@
       
       
   }
-  
+  if(isset($_POST['achat'])){
+    $conn=mysqli_connect("localhost","root","","trillix");
+      if(!($conn)){
+          die("Connection failed ". mysqli_connect_error());
+      }else{
+        $id=$_SESSION['id'];
+        $req="SELECT panier.* FROM panier, produits, clients WHERE clients.idclient=panier.idclient and panier.idclient=$id and panier.idprod=produits.idprod;";
+        if(mysqli_num_rows(mysqli_query($conn,$req))){
+          foreach(mysqli_query($conn,$req) as $row){
+            $req_ventes="INSERT INTO ventes (idclient,idprod,quantité) VALUES (".$row['idclient'].",".$row['idprod'].",".$row['quantité'].");";
+            if(mysqli_query($conn,$req_ventes)){
+              $req_qtte="UPDATE produits SET produits.quantité=p.quantité-v.quantité from produits p INNER JOIN ventes v ON p.idprod=v.idprod where produits.idprod=".$row['idprod'].";";
+              if(mysqli_query($conn,$req_qtte)){
+                echo "oba 3ala zin ouroba";
+              }
+            }
+
+          }
+          $p="DELETE FROM panier where idclient=".$id.";";
+              $res=mysqli_query($conn,$p);
+              if($res){
+                echo "\nmechya s7i7a";
+              }
+        }
+        mysqli_close($conn);
+      }
+  }
 ?>
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,10 +82,10 @@
             }
         </script>
 </head>
-<body class="<?php echo $themeClass; ?>">
+<body class="<?php /*echo $themeClass; ?>">
         <div class="toggle-btn" id="btn">
-            <span id="btntext"><?php echo $btntext; ?></span>
-            <img src="<?php echo $btnIcon; ?>" id="btnIcon" alt="">
+            <span id="btntext"><?php echo $btntext;*/ ?></span>
+            <img src="<?php /*echo $btnIcon;*/ ?>" id="btnIcon" alt="">
         </div>
 
     <section class="signup-login" id="signup-login">
@@ -89,30 +116,4 @@
             </div>
             <script src="file-js/file2.js"></script>
             </body>
-</html>
-<?php
-    if(isset($_POST["achat"])){
-        $conn=mysqli_connect("localhost","root","","trillix");
-        $id=$_SESSION['id'];
-        $pay=$_POST['pay'];
-        $req_confirm="UPDATE panier as a INNER JOIN clients as b on a.idclient=b.idclient SET  Confirmation='oui' WHERE a.idclient=$id;";
-        $req_pay="UPDATE panier as a INNER JOIN clients as b on a.idclient=b.idclient SET  payement='$pay' WHERE a.idclient=$id;";
-        if((mysqli_query($conn,$req_confirm))and(mysqli_query($conn,$req_pay))){
-            
-            
-
-            ?>
-            <script>
-                Swal.fire("Your command will be with you after 2 weeks","success","success");
-                function ab3th(){
-                            window.location.href = "index.php";
-                        }
-                        window.setTimeout(ab3th,1500);
-            </script>
-            <?php
-        }else{
-            echo "fama mochkla";
-        }
-
-    }
-?>
+</html>-->

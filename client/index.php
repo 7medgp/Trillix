@@ -1,41 +1,35 @@
 <?php
-if(isset($_POST["disconnect"])){
-    if (isset($_SERVER['HTTP_COOKIE'])) {
-        $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-        foreach($cookies as $cookie) {
-            $parts = explode('=', $cookie);
-            $name = trim($parts[0]);
-            setcookie($name, '', time()-1000);
-            setcookie($name, '', time()-1000, '/');
+    if(isset($_POST["disconnect"])){
+        if (isset($_SERVER['HTTP_COOKIE'])) {
+            $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+            foreach($cookies as $cookie) {
+                $parts = explode('=', $cookie);
+                $name = trim($parts[0]);
+                setcookie($name, '', time()-1000);
+                setcookie($name, '', time()-1000, '/');
+            }
         }
+        session_destroy();
+        header("location: index.php");   
     }
-    session_destroy();
-    header("location: index.php");   
-}
-session_start();
-$themeClass = '';
-if (!empty($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
-    $themeClass = 'dark-theme';
-    $btnIcon="img/bxs-sun.png";
-    $btntext="Light";
-    $logo ="img/bl title.white.png";
-    $logo1 ="img/bl title.white.png";
-    $tile ="img/tile.white.png";
-}else{
-    $btnIcon="img/bxs-moon (1).png";
-    $btntext="Dark";
-    $logo ="img/bl title.png";
-    $logo1 ="img/bl title.png";
-    $tile ="img/tile.png";
-}
+    session_start();
+    $themeClass = '';
+    if (!empty($_COOKIE['theme']) && $_COOKIE['theme'] === 'dark') {
+        $themeClass = 'dark-theme';
+        $btnIcon="img/bxs-sun.png";
+        $btntext="Light";
+        $logo ="img/bl title.white.png";
+        $logo1 ="img/bl title.white.png";
+        $tile ="img/tile.white.png";
+    }else{
+        $btnIcon="img/bxs-moon (1).png";
+        $btntext="Dark";
+        $logo ="img/bl title.png";
+        $logo1 ="img/bl title.png";
+        $tile ="img/tile.png";
+    }
 
-$conn=mysqli_connect("localhost","root","","trillix");
-     
-
-    
-    
-        
-            
+    $conn=mysqli_connect("localhost","root","","trillix");           
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +37,6 @@ $conn=mysqli_connect("localhost","root","","trillix");
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
         <link rel="stylesheet" href="css-sheets/stylegeneral.css">
         <link rel="stylesheet" href="css-sheets/styles.css">
         <link rel="icon" href="img/Untitled-1.png" type="image/png">
@@ -79,7 +72,6 @@ $conn=mysqli_connect("localhost","root","","trillix");
                     }
                 });
             }
-            
         </script>
     </head>
     <body class="<?php echo $themeClass; ?>">
@@ -90,7 +82,7 @@ $conn=mysqli_connect("localhost","root","","trillix");
         <header>
             <div class="background-nav">
                 <nav class="nav container">
-                    <a href="index.php" class="logo">
+                    <a href="#" class="logo">
                         <img src="<?php echo $logo; ?>" id="logo">
                     </a>
                     <ul class="navbar">
@@ -189,9 +181,13 @@ $conn=mysqli_connect("localhost","root","","trillix");
             <div class="shop-container container">
                 <?php
                     $conn=mysqli_connect("localhost","root","","trillix");
-                    $req_prod="SELECT * from produits;";
+                    $req_prod="SELECT ventes.idprod, produits.*, SUM(produits.prix*ventes.quantité) as flous FROM produits , ventes where ventes.idprod=produits.idprod GROUP by ventes.idprod ORDER by flous DESC;";
                     if(mysqli_num_rows(mysqli_query($conn,$req_prod))> 0){
-                        foreach(mysqli_query($conn,$req_prod) as $row){
+                        $kmela="and ventes.idprod<>'' ";
+                        $req_pr= "SELECT ventes.idprod, produits.*, SUM(produits.prix*ventes.quantité) as flous FROM produits , ventes where ventes.idprod=produits.idprod ";
+                        for($i=0;$i<3;$i++){
+                            $req_prod1=$req_pr.$kmela." GROUP by ventes.idprod ORDER by flous DESC;";
+                            $row=mysqli_fetch_assoc(mysqli_query($conn,$req_prod1));
                             ?>
                             <div class='box'>
                                 <form id="fromcart">
@@ -215,7 +211,7 @@ $conn=mysqli_connect("localhost","root","","trillix");
                                     }
                                 }else{
                                     ?>
-                                    <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')"><i class='bx bx-basket'></i></button>
+                                    <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="redirect()"><i class='bx bx-basket'></i></button>
                                     <?php
                                     
                                 }
@@ -224,7 +220,9 @@ $conn=mysqli_connect("localhost","root","","trillix");
                             
                                 </form>
                             </div>
-                            <?php } ?> 
+                            <?php 
+                                $kmela.="and ventes.idprod<>'".$row['idprod']."' ";
+                                } ?> 
                             
                             <?php
                         }
@@ -265,7 +263,7 @@ $conn=mysqli_connect("localhost","root","","trillix");
                                     }
                                 }else{
                                     ?>
-                                    <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="cartAction('add','<?php echo $row['idprod'];?>')"><i class='bx bx-basket'></i></button>
+                                    <button type="button" id="add_<?php echo $row['idprod'];?>"onclick="redirect()"><i class='bx bx-basket'></i></button>
                                     <?php
                                     
                                 }

@@ -31,20 +31,29 @@
     <script src="file-js/alert.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
       <script>
+            function changement(){
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                  document.getElementById("total").innerHTML =
+                  this.responseText;
+                }
+              };
+              xhttp.open("POST", "add2.php", true);
+              xhttp.send();
+              }
             function cartAction(action,code){
                 var query="";
                 if(action!=""){
                     query= 'action='+action+'&code='+code;
                 }
-                if(action=="upd"){
-                  query+="&qtte="+document.getElementById('cart-qtte').value;
-                }
-                
                 jQuery.ajax({
                     url: "add.php",
                     data:query,
                     type: "POST",
                     success:function(value){
+                      let element=document.getElementById("cart-box");
+                      element.style.display="none";
                       var data=value.split(',');
                       let span=document.getElementById("span");
                       span.innerHTML=data[0];
@@ -207,12 +216,13 @@
           $total=0;
           foreach(mysqli_query($conn,$req) as $row){
             ?>
-        <div class="cart-box">
+        <div class="cart-box" id="cart-box">
           <img src="<?php echo $row['urltsawer'];?>" alt="" class="cart-img">
           <div class="detail-box">
               <div class="cart-product-title"><?php echo $row['label'];?></div>
               <div class="cart-price"><?php echo $row['prix'];?></div>
-              <input type="number" name="qtte" class="cart-qtte" id="cart-qtte"value="<?php echo $row['quantité'];?>" min="1" max="5" onclick="cartAction('upd',<?php echo $row['idprod'];?>)">   
+              <input type="number" name="qtte" class="cart-qtte" id="cart-qtte" value="<?php echo $row['quantité'];?>" min="1" max="5" onclick="changement()">
+              <input type="hidden" id="kazi" value="<?php echo $row['idprod'];?>">   
           </div>
           <form>
               
@@ -223,14 +233,14 @@
           $total+=$row['prix']*$row['quantité'];}
         }
       
-           ?>                               
+           ?>                              
     </div>
     <div class="total">
         <div class="total-title">Total</div>
         <div class="total-price" id="total"><?php echo $total;?></div>
     </div>
     <form action="index1.php" method="post">
-      <button type="submit" class="btn-buy">buy Now</button>
+      <button type="submit" name="achat" class="btn-buy"  >buy Now</button>
     </form>
     
       </section>
@@ -262,7 +272,7 @@
             </div> 
         </footer>
         <div class="copyright">
-            <p>&#169; Ahmed Hamza Gwissem & Youssef Essid All Right Reserved.</p>
+            <p>&#169; Ahmed Hamza Gwissem All Right Reserved.</p>
         </div>
         <script src="file-js/file1.js"></script>
 </body>
@@ -310,6 +320,7 @@
               }
             }      
     }
+    
     
   
 ?>

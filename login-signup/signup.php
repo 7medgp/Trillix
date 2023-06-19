@@ -94,7 +94,7 @@
                 exit();
                 //header("Location: index.php");
             }
-            $req_verif="SELECT * from clients where mail='$mail' and nom='$nom' and tel='$tel';";
+            $req_verif="SELECT * from clients where mail='$mail';";
             if(mysqli_num_rows(mysqli_query($conn,$req_verif))>0)
             {
                 ?>
@@ -128,7 +128,7 @@
                         $res=mysqli_fetch_assoc($res1);
                         session_start();
                         $_SESSION['nom']=$res['nom'];
-                        session_id($res['idclient']);
+                        $_SESSION['id']=$res['idclient'];
                         $_SESSION['prenom']=$res['prenom'];
                         $_SESSION['mail']=$res['mail'];
                         $_SESSION['mdp']=$res['mdp'];
@@ -136,7 +136,7 @@
                         $_SESSION['tel']=$res['tel'];
                         ?>
                         <script>
-                            Swal.fire('Welcom to Trillix','Hoping a you enjoy your visit','success')
+                            Swal.fire('Welcom to Trillix','Hoping you enjoy your visit','success')
                             setTimeout(wa9et, 2500);
                             function wa9et(){
                                 window.location.href = "../index.php";
